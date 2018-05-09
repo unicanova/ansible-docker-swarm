@@ -24,4 +24,4 @@
     owner: root
     group: root
     mode: 0600
-  when: swarm_config_dir is defined
+  when: swarm_copy_files | default(false)
