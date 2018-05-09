@@ -19,7 +19,7 @@
 
 - name: copy configs if they exist
   copy:
-    source: files
+    src: files
     dest: "{{ stack_directory }}/files"
     owner: root
     group: root
