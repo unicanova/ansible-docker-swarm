@@ -1,2 +1,10 @@
 ---
 # defaults file for docker-swarm
+
+stack_name: default
+docker_compose_template: docker-compose.yml
+env_name: dev
+swarm_base_dir: /etc/docker/compose
+# needed for git checkout
+key_file: id_rsa
+stack_directory: "{{ swarm_base_dir }}/{{ env_name }}/{{ stack_name }}"

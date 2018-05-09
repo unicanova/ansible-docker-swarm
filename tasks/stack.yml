@@ -1,25 +1,9 @@
 ---
 
-- name: make sure that directory exists
-  file:
-    path: "{{ swarm_base_dir | default('/etc/docker/compose/')}}"
-    state: directory
-    mode: 0700
-    owner: root
-    group: root
-
-- name: clone swarm compose files
-  git:
-    repo: "{{ swarm_git_repo  }}"
-    ssh_opts: "-o StrictHostKeyChecking=no"
-    dest:  "{{ swarm_base_dir | default('/etc/docker/compose/') }}"
-    version: "{{ branch_name }}"
-
-- name: deploy stack with registry password
+- name: deploy stack with registry credentials
   command: >
     retry=5
     i=1;
-    docker login --username="{{ docker_registry_user }}" --password="{{ docker_registry_password }}" "{{ docker_registry_url }}"
     while [[ $i -lt $retry ]]; do
       docker stack deploy --compose-file --with-registry-auth docker-compose.yml "{{ stack_name }}";
       ret=$?;
@@ -34,10 +18,10 @@
       fi;
     done;
   args:
-    chdir: "{{ swarm_base_dir | default('/etc/docker/compose/') + swarm_dir|default('swarm/') + stack_name }}"
-  when: docker_registry_password_auth | default(true)
+    chdir: "{{ stack_directory }}"
+  when: deploy_with_auth | default(true)
 
-- name: deploy stack without registry password
+- name: deploy stack without registry credentials
   command: >
     retry=5
     i=1;
@@ -55,5 +39,5 @@
       fi;
     done;
   args:
-    chdir: "{{ swarm_base_dir | default('/etc/docker/compose/') + swarm_dir|default('swarm/') + stack_name }}"
+    chdir: "{{ stack_directory }}"
   when: not docker_registry_password_auth | default(true)

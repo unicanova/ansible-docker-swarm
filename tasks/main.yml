@@ -1,3 +1,4 @@
 ---
 # tasks file for docker-swarm
+- include: get-configs.yml
 - include: stack.yml
