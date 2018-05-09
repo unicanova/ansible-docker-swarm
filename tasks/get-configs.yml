@@ -20,7 +20,7 @@
 - name: copy configs if they exist
   copy:
     src: files
-    dest: "{{ stack_directory }}/files"
+    dest: "{{ stack_directory }}"
     owner: root
     group: root
     mode: 0600
