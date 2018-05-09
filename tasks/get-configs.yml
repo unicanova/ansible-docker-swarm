@@ -1,5 +1,14 @@
 ---
 
+- name: swarm directory present
+  file:
+    path: "{{ stack_directory }}"
+    state: directory
+    owner: "{{ swarm_user | default('root') }}"
+    group: "{{ swarm_group | default('root') }}"
+    mode: "0700"
+
+
 - name: create swarm template
   template:
     src: "{{ docker_compose_template }}"
