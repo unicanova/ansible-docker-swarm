@@ -1,4 +1,6 @@
 ---
 # tasks file for docker-swarm
+- include: docker-login.yml
+  when: deploy_with_auth | default(true)
 - include: get-configs.yml
 - include: stack.yml
