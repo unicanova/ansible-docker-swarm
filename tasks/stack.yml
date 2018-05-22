@@ -4,10 +4,10 @@
   command: docker stack deploy --with-registry-auth --compose-file  docker-compose.yml "{{ stack_name }}"
   args:
     chdir: "{{ stack_directory }}"
-  when: deploy_with_auth | default(true)
+  when: deploy_with_auth | default(false)
 
 - name: deploy stack without registry credentials
   command: docker stack deploy --compose-file  docker-compose.yml "{{ stack_name }}"
   args:
     chdir: "{{ stack_directory }}"
-  when: not docker_registry_password_auth | default(true)
+  when: not deploy_with_auth | default(false)
