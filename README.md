@@ -25,7 +25,7 @@ $ git clone https://github.com/unicanova/ansible-docker-swarm
 $ cd ansible-docker-swarm
 ```
 Specify host addresses in the file /etc/ansible/hosts.  
-Create a [site.yml](#Ex3) file, where you can specify the users you need to add.  
+Create a [site.yml](#Ex3) file, where you can specify the which template use for deplaoy docker swarm stack.  
 In the playbook site.yml you can override varibales according to the [table](#Table1), if necessary.  
 
 Execute command:  
