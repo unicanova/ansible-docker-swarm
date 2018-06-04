@@ -1,4 +1,4 @@
-- name: Log into nexus
+- name: Log into registry
   docker_login:
     registry: "{{ docker_registry_url }}"
     username: "{{ docker_registry_username }}"
