@@ -4,3 +4,4 @@
   when: deploy_with_auth | default(false)
 - include: get-configs.yml
 - include: stack.yml
+- include: monitoring.yml

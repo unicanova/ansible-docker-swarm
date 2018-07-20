@@ -17,6 +17,14 @@
     group: root
     mode: 0600
 
+- name: create swarm monitoring template
+  template:
+    src: "{{ docker_compose_monitoring_template }}"
+    dest: "{{ stack_directory }}/docker-compose-monitoring.yml"
+    owner: root
+    group: root
+    mode: 0600
+
 - name: copy configs if they exist
   copy:
     src: files
